@@ -87,6 +87,7 @@ main article {
 
 .animal-card-photo {
     min-width:200px;
+    flex-basis: 200py;
     overflow: hidden;
 }
 
