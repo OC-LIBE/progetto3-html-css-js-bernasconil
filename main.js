@@ -13,6 +13,21 @@ async function displayPets(){
     const template = document.querySelector("#animal-card-template")
     const wrapper = document.querySelector("main")
     console.log(template)
+    
+    function agetext(anno){
+        var oggi = new Date();
+        var annoCorrente = oggi.getFullYear()
+        eta = annoCorrente - anno
+        if (eta==0) {
+            return 'less than 1 year old';
+        } else if (eta==1) {
+            return '1 year old';
+        } else {
+            return eta + ' years old'
+        }
+
+    }
+    
     pets.forEach(pet =>{
             const clone = template.content.cloneNode(true)
             // qui modifichiamo il template
@@ -20,8 +35,31 @@ async function displayPets(){
             //aggiorno la foto
             const image = clone.querySelector(".animal-card-photo img")
             image.src = pet.photo
-            
             //console.log(pet.photo)
+
+            // aggiungo la descrizione
+            const text = clone.querySelector('.animal-card-text p')
+            text.textContent = pet.description
+
+            // aggiungo il nome
+            const name = clone.querySelector('.animal-card-text h1')
+            name.textContent = pet.name
+
+            //aggiungo la specie
+            const type = clone.querySelector('.specie')
+            type.textContent = pet.species
+
+            //aggiungo l'età
+            const age = clone.querySelector('.eta')
+            age.textContent = agetext(pet.birthYear)
+            
+            //aggiungo nome su bottone
+            const bottone = clone.querySelector('.animal-card-text button a')
+            bottone.textContent = 'Adopt ' + pet.name
+
+            //cambio sito bottone
+            const sito = clone.querySelector('.animal-card-text button a')
+            sito.href = 'https://frapollif.github.io/pet-adoption-data/pets/' + pet.id
 
             // aggiungiamo l'articolo alla pagina
             wrapper.appendChild(clone)
