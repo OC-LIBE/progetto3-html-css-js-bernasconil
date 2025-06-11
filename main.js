@@ -47,7 +47,7 @@ async function displayPets(){
 
             //aggiungo la specie
             const type = clone.querySelector('.specie')
-            type.textContent = pet.species
+            type.textContent = pet.species.charAt(0).toUpperCase() + pet.species.slice(1)
 
             //aggiungo l'età
             const age = clone.querySelector('.eta')
@@ -59,8 +59,7 @@ async function displayPets(){
 
             //cambio sito bottone
             const sito = clone.querySelector('.animal-card-text button a')
-            sito.href = 'https://frapollif.github.io/pet-adoption-data/pets/' + pet.id
-
+            sito.href = website + '/pets/' + pet.id
             // aggiungiamo l'articolo alla pagina
             wrapper.appendChild(clone)
         }
@@ -68,3 +67,24 @@ async function displayPets(){
 }
 
 displayPets()
+
+function displayFilterAnimals(e) {
+    const filter = e.target.dataset.filterAnimal;
+    const articles = document.querySelectorAll('article')
+    
+    //articles.forEach(article =>{
+        //if (article.dataset.species == filter) {
+            //article.style.display = ''
+        //}
+        //else {
+            //article.style.display = 'none'
+        //}
+    //})
+//} cercare di far vedere solo determinati articoli di specie quando schiacciato bottone
+const filterButton = document.querySelectorAll("nav button");
+
+filterButton.forEach(button => {
+    button.addEventListener('click', (e) => {
+        displayFilterAnimals(e)
+    })
+});
